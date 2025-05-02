@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMessage = document.getElementById('errorMessage');
     const jpegButton = document.getElementById('jpegButton');
     const pngButton = document.getElementById('pngButton');
-    
+    const proxyUrl = '/.netlify/functions/proxy?url=';
     // Check image when button is clicked
     checkButton.addEventListener('click', checkImage);
     
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Download error:', error);
         }
     }
-    
+  
     // Add this new function for direct download fallback
     // In the directDownload function, remove the extractFilename function definition
     function directDownload(imageUrl, format) {

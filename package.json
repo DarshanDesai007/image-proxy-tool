@@ -4,11 +4,13 @@
   "description": "A web tool to download photos in high quality",
   "main": "proxy.js",
   "scripts": {
-    "start": "node proxy.js"
+    "start": "node proxy.js",
+    "dev": "nodemon proxy.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "axios": "^1.6.2"
+    "axios": "^1.6.2",
+    "node-fetch": "^2.6.7"
   }
 }

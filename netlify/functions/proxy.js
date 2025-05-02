@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 exports.handler = async function(event, context) {
   // Get the image URL from the query parameters
@@ -12,19 +12,16 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    // Fetch the image
-    const response = await fetch(imageUrl);
-    
-    if (!response.ok) {
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({ error: `Failed to fetch image: ${response.statusText}` })
-      };
-    }
+    // Fetch the image using axios instead of fetch
+    const response = await axios({
+      url: imageUrl,
+      method: 'GET',
+      responseType: 'arraybuffer'
+    });
     
     // Get the image data and content type
-    const buffer = await response.buffer();
-    const contentType = response.headers.get('content-type');
+    const buffer = Buffer.from(response.data);
+    const contentType = response.headers['content-type'];
     
     // Return the image with appropriate headers
     return {
@@ -39,7 +36,7 @@ exports.handler = async function(event, context) {
     };
   } catch (error) {
     return {
-      statusCode: 500,
+      statusCode: error.response ? error.response.status : 500,
       body: JSON.stringify({ error: `Server error: ${error.message}` })
     };
   }

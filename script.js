@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         checkButton.textContent = 'Checking...';
         checkButton.disabled = true;
         
-        // Create a proxied URL
-        const proxiedUrl = `http://localhost:3000/proxy-image?url=${encodeURIComponent(originalUrl)}`;
+        // Create a proxied URL - UPDATED to use Netlify function
+        const proxiedUrl = `${proxyUrl}${encodeURIComponent(originalUrl)}`;
         
         // Create a new image object to test the URL
         const img = new Image();
